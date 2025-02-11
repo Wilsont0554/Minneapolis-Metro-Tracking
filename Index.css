@@ -1,0 +1,16 @@
+
+.panelLeft{
+    width: 50%;
+    max-width: 80%;
+    height: auto;
+    background-color: grey;
+    float: left;
+}
+
+svg{
+    background-color: whitesmoke;
+    max-width: 100%;
+    height: auto;
+}
+
+

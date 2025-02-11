@@ -1,0 +1,7 @@
+Blue Line: #7dbef9
+
+Green Line: #70a580
+
+Red Line: #fa7369
+
+Orange Line: #eeb071

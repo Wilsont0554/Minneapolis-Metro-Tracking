@@ -1,0 +1,57 @@
+.infoBox{
+    position: absolute;
+    width: 25%;
+    height: 20%;
+    min-height: 20%;
+    display: none;
+    background-color: rgb(234, 234, 234);
+
+    float: right;
+    left: 0;
+    top: 0;
+    
+    border-style: groove;
+    border-color: rgb(61, 61, 61);
+    border-radius: 5%;
+    
+    padding: 10px;
+}
+
+.lineNumberCard{
+    
+    text-align: left;
+    display: inline;
+}
+
+.infoCardLeft{
+    max-width: 70%;
+    float: left;
+}
+
+.infoCardRight{
+    max-width: 30%;
+    float: right;
+}
+
+.switchLineButton{
+    transition-duration: 300ms;
+    
+    background-color: var(--background-color);
+
+    width: 60px;
+    height: 60px;
+    
+    border-radius: 100%;
+    border-style: solid;
+    border-color: var(--border-color);
+}
+
+.switchLineButton:hover{
+    background-color: var(--hover-color);
+    border-color: rgb(234, 234, 234);
+    color: white;
+}
+
+.lineButtonList{
+    list-style-type: none;
+}
