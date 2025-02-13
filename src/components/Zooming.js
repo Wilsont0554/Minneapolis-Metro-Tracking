@@ -1,4 +1,3 @@
-if (screen.height > 1000){
   window.onload = function (){
     const navMap = {
       187: {act: 'zoom', dir: 1,  name: 'in'}, // ->
@@ -76,7 +75,7 @@ if (screen.height > 1000){
       }
     }, false);
   }
-}
+
 
 /*var zoomAmount = 0.75;
 var panAmount = 0.75;

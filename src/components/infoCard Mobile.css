@@ -1,4 +1,4 @@
-@media (max-height: 900px) {
+@media (max-height: 700px) {
     .hide{
         display: inline;
     }
@@ -7,7 +7,7 @@
         display: none;
         bottom: 0px;
         width: 100vw;
-        max-height: 25vh;
+        max-height: 50vh;
         background-color: rgb(234, 234, 234);
 
         flex-wrap: nowrap;

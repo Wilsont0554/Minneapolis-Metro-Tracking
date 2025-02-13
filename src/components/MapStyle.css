@@ -45,8 +45,6 @@ text,p,h4,button {
 
 @media (max-height: 1000px) {
     .newMap{
-        width: auto;
-        height: 100%; 
         transform-origin: 0 0;
         transform: scale(1);
     }
