@@ -5,7 +5,7 @@ const numberOfRoutes = 5;
 
 export default function MetroMap (props) {
     
-  const {moveInfoBox, setPlaceCode, displayInfoBox, updateLinesAtStation, displayedPlaceCode, getDisplayedPlaceCode} = props;
+  const {moveInfoBox, setPlaceCode, displayInfoBox, updateLinesAtStation, displayedPlaceCode, getDisplayedPlaceCode, setCurrentLinesStops} = props;
 
   //st1701
   //const apiKey = '204c7b0b6e7c4dfda32729879714dcf4';
@@ -20,12 +20,10 @@ export default function MetroMap (props) {
   * Then check if any of those routes stop at the desired station that the user has selected.
   */
   async function checkForMultipleRoutes(placeCode){
-    document.getElementById('errorMessage').innerHTML = '';
 
     //these place codes are used for when a route has different station names for differing directions
     var direction0PlaceCode = placeCode;
     var direction1PlaceCode = placeCode;
-    var mapheight = document.getElementById('newMap').style.scale;
 
     //if there is more than one place code
     if (placeCode.length > 4){
@@ -45,12 +43,17 @@ export default function MetroMap (props) {
     //Go through the first x number of routes
     for (let i = 0; i < numberOfRoutes; i++) {
       var currentRouteID = allRoutes[i];
+      if (currentRouteID.route_id == 425){ //station 425 does not show up on the official map
+        continue
+      }
       const checkRoutesStopsFetch = await fetch('https://svc.metrotransit.org/nextrip/stops/' + currentRouteID.route_id + '/0');
       var checkRoutesStops = await checkRoutesStopsFetch.json();
       
+
       //check to see if this route stops at the desired station(s)
       checkRoutesStops.forEach(currentPlaceCode => {
         if (direction0PlaceCode == currentPlaceCode.place_code || direction1PlaceCode == currentPlaceCode.place_code){
+          setCurrentLinesStops(checkRoutesStops);
           linesAtCurrentStation.push(currentRouteID.route_id);
         }
       });
@@ -63,7 +66,7 @@ export default function MetroMap (props) {
     setPlaceCode(placeCode);
 
     //alter text box size based on the number of lines at this station
-    document.getElementById('hide').style.height = (5 * linesAtCurrentStation.length) + '%'; 
+    //document.getElementById('hide').style.height = (linesAtCurrentStation.length * 45); 
 
     //toggle the info box with the first station dispalyed. (changing the '0' value will change which station is disaplyed first)
     toggleInfoBox(linesAtCurrentStation[0], direction0PlaceCode, direction1PlaceCode);
@@ -76,8 +79,6 @@ export default function MetroMap (props) {
 
     var hidden = document.getElementById("hide").style.display == '';
     var infoBoxCoords = document.getElementById('hide');
-
-    var tempplaceCode = getDisplayedPlaceCode();
     
     if (hidden || getDisplayedPlaceCode().substring(0,4) != direction0PlaceCode){
       displayInfoBox(lineID, true, direction0PlaceCode, direction1PlaceCode);
@@ -94,11 +95,10 @@ export default function MetroMap (props) {
     var infoBoxCoords = document.getElementById('hide');
 
     if (infoBoxCoords.style.display == '' || getDisplayedPlaceCode().substring(0,4) != errorCode){
-      infoBoxCoords.style.display = 'inline';
+      infoBoxCoords.style.display = 'flex';
       moveInfoBox(errorCode);
+      document.body.style.setProperty("--infoBx-background", 'rgb(194, 194, 194)');    
       document.getElementById('stopName').innerHTML = 'No Stop Information';
-
-      document.getElementById('errorMessage').innerHTML = 'The API does not provide information on this stop';
   
       document.getElementById('currentLine').innerHTML = '';
   
@@ -128,7 +128,7 @@ export default function MetroMap (props) {
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
-      viewBox="0 0 1920 1080"
+      viewBox="0 0 1920 1920"
       className="newMap"
       id = "newMap"
       style = {{}}
