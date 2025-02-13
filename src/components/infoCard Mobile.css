@@ -1,10 +1,10 @@
-@media (max-height: 1000px) {
+@media (max-height: 900px) {
     .hide{
         display: inline;
     }
     .infoBox{
         position: absolute;
-        display: flex;
+        display: none;
         bottom: 0px;
         width: 100vw;
         max-height: 25vh;
