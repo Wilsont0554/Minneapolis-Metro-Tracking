@@ -43,7 +43,7 @@ text,p,h4,button {
     font-style: normal;
 }
 
-@media (max-height: 1000px) {
+@media (max-width: 1000px) {
     .newMap{
         transform-origin: 0 0;
         transform: scale(1);
