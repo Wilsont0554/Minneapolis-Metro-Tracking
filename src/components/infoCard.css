@@ -54,6 +54,15 @@ body{
     flex-grow: 5;
 }
 
+.insideStationName{
+
+    flex-grow: 5;
+    padding-top: 0px;
+    padding-left: 10px;
+    flex-basis: 90%;
+    flex-grow: 5;
+}
+
 .lineNumberCard{
     text-align: right;
     display: inline;
@@ -69,6 +78,20 @@ body{
     width: 25%;
     height: 100%;
     float: right;
+}
+
+.exitRight{
+    float: right;
+}
+
+.exit{
+    float: right;
+    width: calc(2vw);
+    height: calc(2vw); 
+    
+    border-radius: 100%;
+    border-style: none;
+    background-color: rgb(234, 234, 234);
 }
 
 .switchLineButton{

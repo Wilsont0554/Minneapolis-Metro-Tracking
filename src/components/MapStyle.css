@@ -31,6 +31,11 @@ body{
     height: 100%;
 }
 
+.svgWrapperWrapper{
+    width: 100%;
+    height: auto;
+}
+
 .newMap{
     width: auto;
     height: 100%; 
@@ -43,9 +48,4 @@ text,p,h4,button {
     font-style: normal;
 }
 
-@media (max-width: 1000px) {
-    .newMap{
-        transform-origin: 0 0;
-        transform: scale(1);
-    }
-}
+

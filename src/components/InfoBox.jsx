@@ -6,12 +6,23 @@ export default function InfoBox(props) {
 
     const {placeCode, displayInfoBox, stationsStops, lineColors, changeLine, trackTransport} = props;
 
+    function closeInfoBox(){
+        document.getElementById('hide').style.display = '';
+    }
+
     return(
         
         <div id = "hide" className = "infoBox" style={{'--infoBoxScale' : 1}}> 
-            
             <div id = "stationName" className = "stationName">
-                <p id = "stopName">:  </p>
+                <div className = 'insideStationName'>
+                    <div className = "infoCardLeft">
+                        <p id = "stopName" className='stopName'>:  </p>
+                    </div>
+                    
+                    <div className = "exitRight">
+                        <button className='exit' onClick={ () => closeInfoBox()}></button>
+                    </div>
+                </div>
             </div>
 
             {/*
@@ -20,6 +31,7 @@ export default function InfoBox(props) {
             </button>
             */}
             <div className = 'insideContainter'>
+                
                 <div className = "infoCardLeft">
                     <span id = 'errorMessage'> </span>
                     <p className='Info'>Metro Line: <span id = "currentLine" className='Info'></span></p>

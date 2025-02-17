@@ -1,4 +1,6 @@
+ 
   window.onload = function (){
+
     const navMap = {
       187: {act: 'zoom', dir: 1,  name: 'in'}, // ->
       189: {act: 'zoom', dir: -1, name: 'out'}, //
@@ -15,6 +17,10 @@
     
     let nav = null, tg = Array(4), f =0, rID = null;
     
+    if (screen.height < 1200){
+      document.getElementById('svgWrapperWrapper').style.height = screen.height + 'px';
+    }
+
     function update(){
       let k = ++f/NF, j = 1-k, cvb = VB.slice();
 
@@ -54,7 +60,7 @@
         
           for (let i = 0; i < 2; i++){
             tg[i + 2] = VB[i + 2]/Math.pow(2, nav.dir);
-            tg[i] = 0.5 * (DMAX[i] - tg[i + 2]);
+            tg[i] = 0.25 * (DMAX[i] - tg[i + 2]);
           }
         }
 
@@ -65,10 +71,8 @@
             //console.log(`cannot move ${nav.name} more`);
             return;
           }
-          tg[nav.axis] = VB[nav.axis] + 0.5 * nav.dir * VB[nav.axis + 2];
-          
-        }
-        
+          tg[nav.axis] = VB[nav.axis] + 0.25 * nav.dir * VB[nav.axis + 2];
+        }       
 
         update();
 

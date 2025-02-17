@@ -122,7 +122,8 @@ export default function MetroMap (props) {
  
   //Map SVG
   return (
-    <div className="svgWapper">
+  <div className="svgWrapperWrapper" id="svgWrapperWrapper">
+    <div className="svgWrapper" id = 'svgWrapper'>
       
       <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -599,18 +600,20 @@ export default function MetroMap (props) {
           strokeMiterlimit={10}
           d="M1557.58 326.9L1629.77 326.9"
         />
-        <text transform="translate(1639.036 331.98)" className="st6 st10">
-          {"Orange Line"}
-        </text>
-        <text transform="translate(1350 100)">
-          {"Use the (+ / -) keys to zoom in / out"}
-        </text>
-        <text transform="translate(1335 125)">
-          {"Use the (<-- / -->) keys to pan left / right"}
-        </text>
-        <text transform="translate(1295 150)">
-          {"Use the (up and down arrow keys) to pan up / down"}
-        </text>
+        <g className="instructions">
+          <text transform="translate(1639.036 331.98)" className="st6 st10">
+            {"Orange Line"}
+          </text>
+          <text transform="translate(1350 100)">
+            {"Use the (+ / -) keys to zoom in / out"}
+          </text>
+          <text transform="translate(1335 125)">
+            {"Use the (<-- / -->) keys to pan left / right"}
+          </text>
+          <text transform="translate(1295 150)">
+            {"Use the (up and down arrow keys) to pan up / down"}
+          </text>
+        </g>
       </g>
     </svg>
   
@@ -645,6 +648,7 @@ export default function MetroMap (props) {
     <line className="st1" x1={1646.73} y1={2466.76} x2={1964.91} y2={2466.76} />
     <circle className="station" id ='MAAM' cx={1646.73} cy={2466.76} r={95.45} onClick={ () => checkForMultipleRoutes('MAAM')} />
   </svg>*/} 
+    </div>
   </div>
   );
 }

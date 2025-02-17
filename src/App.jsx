@@ -32,6 +32,7 @@ function App() {
 
   //interval for updating 
   function useInterval(callback, delay) {
+    
     const savedCallback = useRef();
    
     // Remember the latest callback.
