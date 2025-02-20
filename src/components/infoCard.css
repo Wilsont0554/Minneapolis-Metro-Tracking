@@ -13,11 +13,13 @@
     border-width: 3px;
     border-color: var(--infoBx-background);
     border-radius: 3%;
+    cursor: default;
 
 }
 
 body{
     --infoBx-background: rgb(194, 194, 194);
+    cursor: grab;
 }
 
 .pointer{
@@ -69,7 +71,7 @@ body{
 }
 
 .infoCardLeft{
-    max-width: 70%;
+    max-width: 80%;
     height: 100%;
     float: left;
 }
@@ -81,11 +83,12 @@ body{
 }
 
 .exitRight{
+    width: 25%;
+    height: 100%;
     float: right;
 }
 
 .exit{
-    float: right;
     width: calc(2vw);
     height: calc(2vw); 
     

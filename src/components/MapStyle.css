@@ -1,5 +1,6 @@
 circle:hover{
     r: 22px;
+    cursor: default;
 }
 
 :root{
@@ -13,6 +14,8 @@ circle:hover{
 .intersectLines:hover{
     transform: scale(1.2);
     transform-origin: var(--offsetX) var(--offsetY);
+    cursor: pointer;
+
 }
 
 .intersectCircle{
@@ -40,6 +43,7 @@ body{
     width: auto;
     height: 100%; 
     transform-origin: 0 0;
+    user-select: none;
 }
 
 text,p,h4,button {

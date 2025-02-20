@@ -19,7 +19,7 @@ export default function InfoBox(props) {
                         <p id = "stopName" className='stopName'>:  </p>
                     </div>
                     
-                    <div className = "exitRight">
+                    <div className = "infoCardRight">
                         <button className='exit' onClick={ () => closeInfoBox()}></button>
                     </div>
                 </div>

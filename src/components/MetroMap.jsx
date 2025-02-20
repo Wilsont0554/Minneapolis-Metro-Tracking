@@ -20,7 +20,7 @@ export default function MetroMap (props) {
   * Then check if any of those routes stop at the desired station that the user has selected.
   */
   async function checkForMultipleRoutes(placeCode){
-
+    
     //these place codes are used for when a route has different station names for differing directions
     var direction0PlaceCode = placeCode;
     var direction1PlaceCode = placeCode;
@@ -37,7 +37,7 @@ export default function MetroMap (props) {
       var tempRoutes = await allRoutesFetch.json(); //every route
       allRoutes = tempRoutes;
     }
-      
+        
     var linesAtCurrentStation = []; //represents the routs at the station(placeCode)
 
     //Go through the first x number of routes
@@ -129,7 +129,7 @@ export default function MetroMap (props) {
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
-      viewBox="0 0 1920 1920"
+      viewBox="0 0 1920 1920" //right/left, down/up, 
       className="newMap"
       id = "newMap"
       style = {{}}
