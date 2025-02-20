@@ -20,7 +20,7 @@
     }, 
       _SVG = document.querySelector('svg'),
       VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c),
-      DMAX = VB.slice(2), WMIN = 480, NF = 1;
+      DMAX = VB.slice(2), WMIN = 960, NF = 1;
     
     let nav = null, tg = Array(4), f =0, rID = null;
 
@@ -60,39 +60,61 @@
   document.addEventListener('mousemove', e => {  
     if (isMouseDown){
 
+      //right
       if (e.pageX < oldX) {
-        //console.log("right");
         var moveAmount = oldX - e.pageX;
-        tg[0] = VB[0] + moveAmount * 1;
         nav = navMap[39];
-        
+        if(!((VB[nav.axis]) >= Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]) - 500)){
+          tg[0] = VB[0] + moveAmount * 1;
+        }
+        else{
+          tg[0] = DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500;
+        }
         update();
       } 
       
+      //left
       else if (e.pageX > oldX) {
-        //console.log("left");
         var moveAmount = e.pageX - oldX;
-        tg[0] = VB[0] + moveAmount * -1;
         nav = navMap[37];
+
+        if((Math.abs(VB[nav.axis]) <= Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]) - 500)){
+          tg[0] = VB[0] + moveAmount * -1;
+        }
+        else{
+          tg[0] = (DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500) * -1;
+        }
         update();
       }
 
+      //down
       if (e.pageY < oldY) {
-        //console.log(e.pageY - oldY, 'down');
         var moveAmount = oldY - e.pageY;
-        tg[1] = VB[1] + moveAmount * 1;
         nav = navMap[40];
+
+        if(((VB[nav.axis]) <= (Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]  - 500)))){
+          tg[1] = VB[1] + moveAmount * 1;
+        }
+        else{
+          tg[1] = (DMAX[nav.axis] - 500);
+        }
         update();
       } 
       
+      //up
       else if (e.pageY > oldY) {
-        //console.log(e.pageY - oldY, 'up');
         var moveAmount = e.pageY - oldY;
-        tg[1] = VB[1] + moveAmount * -1;
-        nav = navMap[38];
+        nav = navMap[38];       
+
+        if((-1 * (VB[nav.axis]) <= Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 1500))){
+          tg[1] = VB[1] + moveAmount * -1;
+        }
+        else{
+          tg[1] = DMAX[nav.axis] * -1 + 1500;
+        }
         update();
       }
-      
+
     }
     oldY = e.pageY;
     oldX = e.pageX;   
@@ -131,6 +153,7 @@
         }
       }
     }
+
     // zoom out
     else if(e.deltaY == 100){
       nav = navMap[900];

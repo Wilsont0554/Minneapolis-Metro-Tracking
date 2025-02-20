@@ -31,9 +31,10 @@
         overflow: scroll;
     }
 
+    /*
     .instructions{
         display: none;
-    }
+    }*/
 
     .newMap{
         transform: scale(1);

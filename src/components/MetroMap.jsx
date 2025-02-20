@@ -600,6 +600,7 @@ export default function MetroMap (props) {
           strokeMiterlimit={10}
           d="M1557.58 326.9L1629.77 326.9"
         />
+        {/*
         <g className="instructions">
           <text transform="translate(1639.036 331.98)" className="st6 st10">
             {"Orange Line"}
@@ -613,7 +614,7 @@ export default function MetroMap (props) {
           <text transform="translate(1295 150)">
             {"Use the (up and down arrow keys) to pan up / down"}
           </text>
-        </g>
+        </g>*/}
       </g>
     </svg>
   
