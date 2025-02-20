@@ -1,3 +1,4 @@
+  
   window.onload = function (){
 
     var oldX = 0;
@@ -111,7 +112,8 @@
     isMouseDown = false;
   }, false);
 
-  
+  if (screen.width > 1000){
+
   document.addEventListener('wheel', e => {
     //zoom in
     if(e.deltaY == -100){
@@ -152,7 +154,7 @@
     update();
 
   }, false);
-
+  }
 }
 
 /* OLD panning
