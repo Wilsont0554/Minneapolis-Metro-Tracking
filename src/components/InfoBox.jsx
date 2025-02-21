@@ -20,7 +20,7 @@ export default function InfoBox(props) {
                     </div>
                     
                     <div className = "infoCardRight">
-                        <button className='exit' onClick={ () => closeInfoBox()}></button>
+                        <button className='exit' onClick={ () => closeInfoBox()}> </button>
                     </div>
                 </div>
             </div>
