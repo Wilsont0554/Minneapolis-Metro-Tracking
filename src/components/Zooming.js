@@ -3,6 +3,7 @@
 
     var oldX = 0;
     var oldY = 0;
+    var zoomAmount = 1.5;
 
     var isMouseDown = false
 
@@ -64,13 +65,15 @@
       if (e.pageX < oldX) {
         var moveAmount = oldX - e.pageX;
         nav = navMap[39];
-        if(!((VB[nav.axis]) >= Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]) - 500)){
+
+        if (nav.dir == 1 && VB[nav.axis] <= DMAX[nav.axis]  * 2 - VB[nav.axis + 2]){
           tg[0] = VB[0] + moveAmount * 1;
+          update();
         }
         else{
-          tg[0] = DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500;
+          //tg[0] = DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500;
+          console.log("can't go right anymore");
         }
-        update();
       } 
       
       //left
@@ -78,13 +81,14 @@
         var moveAmount = e.pageX - oldX;
         nav = navMap[37];
 
-        if((Math.abs(VB[nav.axis]) <= Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]) - 500)){
+        if ((nav.dir == -1 && VB[nav.axis] > 0)){
           tg[0] = VB[0] + moveAmount * -1;
+          update();
         }
         else{
-          tg[0] = (DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500) * -1;
+          //tg[0] = (DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500) * -1;
+          console.log("can't go left anymore");
         }
-        update();
       }
 
       //down
@@ -92,34 +96,41 @@
         var moveAmount = oldY - e.pageY;
         nav = navMap[40];
 
-        if(((VB[nav.axis]) <= (Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]  - 500)))){
+        //console.log((VB[nav.axis]), Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2]));
+
+        if (nav.dir == 1 && VB[nav.axis] <= DMAX[nav.axis] * 1.5 - VB[nav.axis + 2]){
           tg[1] = VB[1] + moveAmount * 1;
+          update();
         }
         else{
-          tg[1] = (DMAX[nav.axis] - 500);
+          //tg[1] = (DMAX[nav.axis] - 500);
+          console.log("can't go down anymore");
         }
-        update();
       } 
       
       //up
       else if (e.pageY > oldY) {
         var moveAmount = e.pageY - oldY;
         nav = navMap[38];       
-
-        if((-1 * (VB[nav.axis]) <= Math.abs(DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 1500))){
-          tg[1] = VB[1] + moveAmount * -1;
-        }
+       
+        if ((nav.dir == -1 && VB[nav.axis] > 0)) {
+            tg[1] = VB[1] + moveAmount * -1;
+            update();
+          }
+          /*
+        if(((VB[nav.axis] * -1) <= (DMAX[nav.axis] * zoomAmount - VB[nav.axis + 2]))){ //!
+        }*/
         else{
-          tg[1] = DMAX[nav.axis] * -1 + 1500;
+          //tg[1] = DMAX[nav.axis] * -1 + 500;
+          console.log("can't go up anymore");
         }
-        update();
+
       }
 
     }
     oldY = e.pageY;
     oldX = e.pageX;   
   }, false);
-
 
   document.addEventListener('mousedown', e => {
     document.body.style.cursor = "grabbing";
@@ -138,6 +149,8 @@
 
   document.addEventListener('wheel', e => {
     //zoom in
+    const element = document.getElementById('newMap');
+
     if(e.deltaY == -100){
       nav = navMap[1000];
       
@@ -146,10 +159,12 @@
           //console.log(`cannot zoom ${nav.name} more`);
           return;
         }
-      
+        zoomAmount += 0.1;
+
         for (let i = 0; i < 2; i++){
+          
           tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
-          //tg[i] = 0.5 * (DMAX[i] - tg[i+2]) ;
+          tg[i] = 0.5 * (DMAX[i] - tg[i+2]) ;
         }
       }
     }
@@ -157,7 +172,8 @@
     // zoom out
     else if(e.deltaY == 100){
       nav = navMap[900];
-      
+      zoomAmount -= 0.1;
+
       if (nav.act == 'zoom'){
         if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
           //console.log(`cannot zoom ${nav.name} more`);
@@ -166,7 +182,7 @@
       
         for (let i = 0; i < 2; i++){
           tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
-          //tg[i] = 0.5 * (DMAX[i] - tg[i+2]) ;
+          tg[i] = 0.5 * (DMAX[i] - tg[i+2]) ;
         }
       }
     }
