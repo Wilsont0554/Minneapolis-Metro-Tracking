@@ -1,4 +1,5 @@
   
+if (screen.height > 700){
   window.onload = function (){
 
     var oldX = 0;
@@ -149,9 +150,7 @@
 
   document.addEventListener('wheel', e => {
     //zoom in
-    const element = document.getElementById('newMap');
-
-    if(e.deltaY == -100){
+    if(e.deltaY < 0){
       nav = navMap[1000];
       
       if (nav.act == 'zoom'){
@@ -162,15 +161,14 @@
         zoomAmount += 0.1;
 
         for (let i = 0; i < 2; i++){
-          
           tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
-          tg[i] = 0.5 * (DMAX[i] - tg[i+2]) ;
+          tg[i] = 0.5 * (DMAX[i] - tg[i+2]);
         }
       }
     }
 
     // zoom out
-    else if(e.deltaY == 100){
+    else if(e.deltaY > 0){
       nav = navMap[900];
       zoomAmount -= 0.1;
 
@@ -182,20 +180,19 @@
       
         for (let i = 0; i < 2; i++){
           tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
-          tg[i] = 0.5 * (DMAX[i] - tg[i+2]) ;
+          tg[i] = 0.5 * (DMAX[i] - tg[i+2]);
         }
       }
     }
    
-
     tg[0] = VB[0];
     tg[1] = VB[1];
     update();
 
   }, false);
   }
+  }
 }
-
 /* OLD panning
         if (nav.act == 'move'){
           //console.log(DMAX[nav.axis], VB[nav.axis + 2], VB[nav.axis]);
