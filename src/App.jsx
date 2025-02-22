@@ -210,7 +210,6 @@ function App() {
 
     var infoBoxCenterLeftRight = (infoBoxRect.right - infoBoxRect.left);
     var infoBoxCenterUpDown = (infoBoxRect.bottom - infoBoxRect.top);
-    //console.log(screen.height);
 
     if (screen.width > 1000){
       infoBoxCoords.style.left = Math.max(((circleRect.right - (circleElement.getAttribute('r'))) - (infoBoxCenterLeftRight/2)),0) + 'px';

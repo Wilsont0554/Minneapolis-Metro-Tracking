@@ -1,4 +1,4 @@
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
 
     .infoBox{
         position: absolute;
@@ -31,17 +31,12 @@
         overflow: hidden;
     }
 
-    /*
-    .instructions{
-        display: none;
-    }*/
-
     .newMap{
         transform: scale(1);
     }
 
     .Info {
-        font-size: calc(1.25vw + 1.25vh); 
+        font-size: calc(1.7vw + 1.7vh); 
     }
     
     .pointer{
@@ -78,5 +73,11 @@
         border-radius: 100%;
         border-style: solid;
         border-color: var(--border-color);
+    }
+
+    text,p,h4,button,span {
+        font-family: "lunatix", sans-serif;
+        font-weight: 200;
+        font-style: normal;
     }
 }
