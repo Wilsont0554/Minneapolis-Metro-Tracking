@@ -8,7 +8,7 @@
     var touchValues = [
         [0,0],
         [0,0]
-    ];
+  ];
 
     var zoomAmount = 1.5;
 
@@ -32,10 +32,6 @@
     
     let nav = null, tg = Array(4), f =0, rID = null;
 
-    if (screen.height < 1200){
-      document.getElementById('svgWrapperWrapper').style.height = screen.height + 'px';
-    }
-
     function update(){
 
       let k = ++f/NF, j = 1-k, cvb = VB.slice();
@@ -51,7 +47,7 @@
       }
 
       _SVG.setAttribute('viewBox', cvb.join(' '));
-
+      /*
       if (!(f%NF)) {
         cancelAnimationFrame(rID);
         rID = null;
@@ -62,7 +58,7 @@
         return;
       }
 
-      rID = requestAnimationFrame(update);
+      rID = requestAnimationFrame(update);*/
     }
 /*
   document.addEventListener('mousemove', e => {  
@@ -199,7 +195,8 @@
   }
 */
   document.addEventListener('touchstart', e => {
-            numberOfTouches++;
+            
+    /*numberOfTouches++;
             touchScreen = true;
             oldX = e.touches[0].clientX;   
             oldY = e.touches[0].clientY;
@@ -210,12 +207,12 @@
         }, false)
 
         document.addEventListener('touchend', e => {
-            numberOfTouches--;
-            touchScreen = false;
+            //numberOfTouches--;
+            //touchScreen = false;*/
         }, false)
-
+    
         document.addEventListener('touchmove', e => {
-            //panning
+            /*panning
             if (touchScreen && numberOfTouches == 1){
                 //swipe right
                 if (e.touches[0].clientX < oldX) {
@@ -307,8 +304,10 @@
             
                 touchValues[1][0] = e.touches[1].clientX;
                 touchValues[1][1] = e.touches[1].clientY;
-            }
-            
+            }*/
+                nav = navMap[39];
+                tg[0] = VB[0] + 2;
+            update()
         }, false)
 
   }
