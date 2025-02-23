@@ -56,6 +56,7 @@ if (screen.height > screen.width){
       
             rID = requestAnimationFrame(update);
           }          
+            document.getElementById('newMap').style.backgroundColor = "rgb(0, 0, 255)";
 
         document.addEventListener('touchstart', e => {
             _SVG.setAttribute('viewBox', '0 0 900 1400');
