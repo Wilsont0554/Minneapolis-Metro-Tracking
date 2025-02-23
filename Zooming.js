@@ -29,6 +29,7 @@ window.onload = function(){
 
         let k = ++f/NF;
         let j = 1-k;
+        let cvb = VB.slice();
   
         if (nav.act == 'zoom'){
           for (let i = 0; i < 4; i++) {
@@ -37,10 +38,10 @@ window.onload = function(){
         }
   
         else if (nav.act == 'move') {
-          //cvb[nav.axis] = j * VB[nav.axis] + k * tg[nav.axis];
+          cvb[nav.axis] = j * VB[nav.axis] + k * tg[nav.axis];
         }
   
-        //_SVG.setAttribute('viewBox', cvb.join(' '));
+        _SVG.setAttribute('viewBox', cvb.join(' '));
     } 
 
     document.addEventListener('touchstart', e => {
@@ -57,10 +58,12 @@ window.onload = function(){
     }, false)*/
 
     document.addEventListener('touchmove', e => {
-        document.getElementById('newMap').style.backgroundColor = ('rgb(152, 223, 184)');
+        document.getElementById('newMap').style.backgroundColor = ('rgb(152, 192, 223)');
         //nav = navMap[39];
         horizontalMovement += 10;
         _SVG.setAttribute('viewBox', ` ${horizontalMovement} 0 900 1400`);
+        _SVG.setAttribute('data-redraw', 'true');
+        _SVG.removeAttribute('data-redraw');
         //tg[0] = VB[0] + 10;
         //update();
 
