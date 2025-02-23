@@ -58,12 +58,11 @@ window.onload = function(){
     }, false)*/
 
     document.addEventListener('touchmove', e => {
-        document.getElementById('newMap').style.backgroundColor = ('rgb(152, 192, 223)');
         //nav = navMap[39];
         horizontalMovement += 10;
         _SVG.setAttribute('viewBox', ` ${horizontalMovement} 0 900 1400`);
-        _SVG.setAttribute('data-redraw', 'true');
-        _SVG.removeAttribute('data-redraw');
+        document.getElementById('newMap').style.backgroundColor = ('rgb(152, 192, 223)');
+        
         //tg[0] = VB[0] + 10;
         //update();
 
