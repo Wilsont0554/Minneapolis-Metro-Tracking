@@ -11,10 +11,7 @@
         ];
 
         
-        var _SVG = document.querySelector('svg');
-        _SVG.setAttribute('viewBox', '0 0 900 1400');
-        var VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c);
-        var DMAX = VB.slice(2);
+        
         var WMIN = 480;
         var NF = 1;
         let nav = null;
@@ -26,9 +23,7 @@
 
             let k = ++f/NF;
             let j = 1-k;
-            let cvb = VB.slice();
       
-            _SVG.setAttribute('viewBox', cvb.join(' '));
           }          
 
         document.addEventListener('touchstart', e => {
