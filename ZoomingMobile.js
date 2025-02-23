@@ -7,7 +7,7 @@ var touchValues = [
     [0,0]
 ];
 
-if (screen.width < 1000){
+if (screen.width < 1200){
     window.onload = function(){
 
         const navMap = {
