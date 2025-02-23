@@ -1,13 +1,14 @@
-var touchScreen = false;
-var oldX = 0;
-var oldY = 0;
-var numberOfTouches = 0;
-var touchValues = [
-    [0,0],
-    [0,0]
-];
+
 
     window.onload = function(){
+        var touchScreen = false;
+        var oldX = 0;
+        var oldY = 0;
+        var numberOfTouches = 0;
+        var touchValues = [
+            [0,0],
+            [0,0]
+        ];
 
         const navMap = {
             187: {act: 'zoom', dir: 1,  name: 'in'}, // ->
@@ -43,7 +44,7 @@ var touchValues = [
             document.getElementById('newMap').style.backgroundColor = ('rgb(120, 120, 120)');
             nav = navMap[39];
             tg[0] = VB[0] + 20;
-            update();
+            //update();
         }, false)
 
         /*
