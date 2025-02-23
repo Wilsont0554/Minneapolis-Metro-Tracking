@@ -2,17 +2,20 @@
 
 window.onload = function(){
 
-    
+    const navMap = { //not the issue
+        187: {act: 'zoom', dir: 1,  name: 'in'}, // ->
+        189: {act: 'zoom', dir: -1, name: 'out'}, //
+        61: {act: 'zoom', dir: 1,  name: 'in'}, // ->
+        173: {act: 'zoom', dir: -1, name: 'out'}, //
+        1000:  {act: 'zoom', dir: 1, name: 'in'}, //scroll up
+        900:  {act: 'zoom', dir: -1, name: 'out'}, //scroll down
+        39:  {act: 'move', dir: 1,  name: 'right',  axis: 0}, // ->
+        40:  {act: 'move', dir: 1,  name: 'down',   axis: 1}, //
+        37:  {act: 'move', dir: -1, name: 'left',   axis: 0}, //
+        38:  {act: 'move', dir: -1, name: 'up',     axis: 1} //
+      };
     var _SVG = document.getElementById('newMap');
-    _SVG.setAttribute('viewBox', '0 0 900 1400');
-    var VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c);
-    var DMAX = VB.slice(2);
-    var WMIN = 480;
-    var NF = 1;
-    let nav = null;
-    let tg = Array(4);
-    let f =0;
-    let rID = null;
+   
 
     function update(){
 
@@ -23,6 +26,7 @@ window.onload = function(){
         if (nav.act == 'zoom'){
           for (let i = 0; i < 4; i++) {
             cvb[i] = j * VB[i] + k * tg[i];
+            
           }
         }
   
@@ -49,7 +53,7 @@ window.onload = function(){
     document.addEventListener('touchmove', e => {
         document.getElementById('newMap').style.backgroundColor = ('rgb(152, 223, 184)');
         //nav = navMap[39];
-        _SVG.setAttribute('viewBox', '0 0 1920 1920');
+        _SVG.setAttribute('viewBox', '0 0 940 1400');
         //tg[0] = VB[0] + 10;
         //update();
 
