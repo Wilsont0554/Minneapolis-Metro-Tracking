@@ -24,7 +24,6 @@ if (screen.height > screen.width){
             38:  {act: 'move', dir: -1, name: 'up',     axis: 1} //
           }, 
         _SVG = document.querySelector('svg');
-        _SVG.setAttribute('viewBox', '0 0 900 1400');
         VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c),
         DMAX = VB.slice(2), WMIN = 480, NF = 1;
         let nav = null, tg = Array(4), f =0, rID = null;
@@ -59,6 +58,7 @@ if (screen.height > screen.width){
           }          
 
         document.addEventListener('touchstart', e => {
+            _SVG.setAttribute('viewBox', '0 0 900 1400');
             numberOfTouches++;
             touchScreen = true;
             oldX = e.touches[0].clientX;   
@@ -70,6 +70,7 @@ if (screen.height > screen.width){
         }, false)
 
         document.addEventListener('touchend', e => {
+            _SVG.setAttribute('viewBox', '0 0 1920 1920');
             numberOfTouches--;
             touchScreen = false;
         }, false)
