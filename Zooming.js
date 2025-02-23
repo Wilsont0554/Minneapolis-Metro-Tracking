@@ -1,5 +1,12 @@
   
-if (screen.height < screen.width){
+var touchScreen = false;
+var oldX = 0;
+var oldY = 0;
+var numberOfTouches = 0;
+var touchValues = [
+    [0,0],
+    [0,0]
+];
   window.onload = function (){
 
     var oldX = 0;
@@ -191,5 +198,118 @@ if (screen.height < screen.width){
 
   }, false);
   }
+
+  document.addEventListener('touchstart', e => {
+    numberOfTouches++;
+    touchScreen = true;
+    oldX = e.touches[0].clientX;   
+    oldY = e.touches[0].clientY;
+    
+    //update first and second finger's location value at the index they are associated with in the e.touches array
+    touchValues[e.touches.length - 1][0] = e.touches[e.touches.length - 1].clientX;
+    touchValues[e.touches.length - 1][1] = e.touches[e.touches.length - 1].clientY;
+}, false)
+
+document.addEventListener('touchend', e => {
+    numberOfTouches--;
+    touchScreen = false;
+}, false)
+
+  document.addEventListener('touchmove', e => {
+      //panning
+      if (touchScreen && numberOfTouches == 1){
+          //swipe right
+          if (e.touches[0].clientX < oldX) {
+              var moveAmount = oldX - e.touches[0].clientX;
+              nav = navMap[39];
+              
+              if (nav.dir == 1 && VB[nav.axis] <= DMAX[nav.axis]  * 2.5 - VB[nav.axis + 2]){
+                  tg[0] = VB[0] + moveAmount * 2;
+                  update();
+              }
+
+          } 
+
+          //swipe left
+          else if (e.touches[0].clientX > oldX) {
+              var moveAmount = e.touches[0].clientX - oldX;
+              nav = navMap[37];
+      
+              if ((nav.dir == -1 && VB[nav.axis] > 0)){
+                  tg[0] = VB[0] + moveAmount * -2;
+                  update();
+              }
+          } 
+
+          //swipe down
+          if (e.touches[0].clientY < oldY) {
+              var moveAmount = oldY - e.touches[0].clientY;
+              nav = navMap[40];
+
+              if (nav.dir == 1 && VB[nav.axis] <= DMAX[nav.axis] * 1.5 - VB[nav.axis + 2]){
+                  tg[1] = VB[1] + moveAmount * 2;
+                  update();
+              }                    
+          } 
+
+          //up
+          else if (e.touches[0].clientY > oldY) {
+              var moveAmount = e.touches[0].clientY - oldY;
+              nav = navMap[38];       
+          
+              if ((nav.dir == -1 && VB[nav.axis] > 0)) {
+                  tg[1] = VB[1] + moveAmount * -2;
+                  update();
+              }
+          }
+          
+          oldY = e.touches[0].clientY;   
+          oldX = e.touches[0].clientX;
+      }
+      
+      //zooming
+      else if (numberOfTouches == 2){
+          var oldHypot = Math.hypot(touchValues[0][0] - touchValues[1][0], touchValues[0][1] - touchValues[1][1]);
+          var newHypot = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+          
+          if (oldHypot > newHypot){
+              nav = navMap[900];
+
+              if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
+                  return;
+              }
+
+              for (let i = 0; i < 2; i++){
+                  tg[i + 2] = VB[i + 2]/Math.pow(1.02, nav.dir);
+                  tg[i] = 0.1 * (DMAX[i] - tg[i+2]) ;
+              }
+              tg[0] = VB[0];
+              tg[1] = VB[1];
+              update(); 
+          }
+          else if (oldHypot < newHypot){
+              nav = navMap[1000];
+
+              if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
+                  return;
+              }
+
+              for (let i = 0; i < 2; i++){
+                  tg[i + 2] = VB[i + 2]/Math.pow(1.02, nav.dir);
+                  tg[i] = 0.1 * (DMAX[i] - tg[i+2]) ;
+              }
+              tg[0] = VB[0];
+              tg[1] = VB[1];
+              update(); 
+          }
+          
+          touchValues[0][0] = e.touches[0].clientX;
+          touchValues[0][1] = e.touches[0].clientY;
+      
+          touchValues[1][0] = e.touches[1].clientX;
+          touchValues[1][1] = e.touches[1].clientY;
+      }
+      
+  }, false)
+
   }
-}
