@@ -1,5 +1,5 @@
   
-if (screen.height > 700){
+if (screen.height > 1000){
   window.onload = function (){
 
     var oldX = 0;
