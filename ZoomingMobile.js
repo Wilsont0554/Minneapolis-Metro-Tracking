@@ -59,6 +59,7 @@ if (screen.height > screen.width){
 
         document.addEventListener('touchstart', e => {
             _SVG.setAttribute('viewBox', '0 0 900 1400');
+            document.getElementById('newMap').style.backgroundColor = "rgb(255, 0, 0)";
             numberOfTouches++;
             touchScreen = true;
             oldX = e.touches[0].clientX;   
@@ -71,6 +72,7 @@ if (screen.height > screen.width){
 
         document.addEventListener('touchend', e => {
             _SVG.setAttribute('viewBox', '0 0 1920 1920');
+            document.getElementById('newMap').style.backgroundColor = "rgb(0, 255, 0)";
             numberOfTouches--;
             touchScreen = false;
         }, false)
