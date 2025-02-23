@@ -2,10 +2,10 @@
 
 window.onload = function(){
 
-    var _SVG = document.querySelector('svg');
-    
+    var test = document.getElementById('newMap');
     document.addEventListener('touchstart', e => {
         document.getElementById('newMap').style.backgroundColor = ('rgb(120, 120, 120)');
+        test.setAttribute('viewBox', '0 0 900 1400');
         //nav = navMap[39];
         //tg[0] = VB[0] + 20;
         //update();
