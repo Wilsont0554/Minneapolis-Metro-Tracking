@@ -1,6 +1,9 @@
 
 
     window.onload = function(){
+
+        var _SVG = document.querySelector('svg');
+        _SVG.setAttribute('viewBox', '0 0 900 1400');
         
         document.addEventListener('touchstart', e => {
             document.getElementById('newMap').style.backgroundColor = ('rgb(120, 120, 120)');
