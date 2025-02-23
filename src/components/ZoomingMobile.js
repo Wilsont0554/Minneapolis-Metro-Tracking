@@ -55,7 +55,7 @@ if (screen.width < 1000){
             }
       
             rID = requestAnimationFrame(update);
-          }          
+        }          
 
         document.addEventListener('touchstart', e => {
             numberOfTouches++;

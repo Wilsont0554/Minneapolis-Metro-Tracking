@@ -1,5 +1,11 @@
 @media (max-width: 800px) {
 
+    html, body{
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
     .infoBox{
         position: absolute;
         display: none;
@@ -14,25 +20,19 @@
         border-radius: 0px;
     }
     
-    body{
-        margin: 0%;
-        padding: 0%;
-        height: 100%;
-    }
-
     .svgWrapper{
-        width: 100%;
-        height: auto;
+        overflow: scroll;
+        height: 100vh;
     }
 
     .svgWrapperWrapper{
-        width: 100%;
-        height: auto;
-        overflow: hidden;
+        height: 100%;
+        width: auto;
     }
 
     .newMap{
-        transform: scale(1);
+        transform: scale(2);
+        
     }
 
     .Info {

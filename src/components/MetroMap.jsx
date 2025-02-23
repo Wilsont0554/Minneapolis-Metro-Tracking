@@ -122,7 +122,6 @@ export default function MetroMap (props) {
  
   //Map SVG
   return (
-  <div className="svgWrapperWrapper" id="svgWrapperWrapper">
     <div className="svgWrapper" id = 'svgWrapper'>
       
       <svg
@@ -650,6 +649,5 @@ export default function MetroMap (props) {
     <circle className="station" id ='MAAM' cx={1646.73} cy={2466.76} r={95.45} onClick={ () => checkForMultipleRoutes('MAAM')} />
   </svg>*/} 
     </div>
-  </div>
   );
 }
