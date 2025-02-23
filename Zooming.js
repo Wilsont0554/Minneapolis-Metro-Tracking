@@ -54,9 +54,9 @@
 
         document.addEventListener('touchstart', e => {
             document.getElementById('newMap').style.backgroundColor = ('rgb(120, 120, 120)');
-            nav = navMap[39];
-            tg[0] = VB[0] + 20;
-            update();
+            //nav = navMap[39];
+            //tg[0] = VB[0] + 20;
+            //update();
         }, false)
 
         /*
