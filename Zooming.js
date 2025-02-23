@@ -21,16 +21,23 @@
             40:  {act: 'move', dir: 1,  name: 'down',   axis: 1}, //
             37:  {act: 'move', dir: -1, name: 'left',   axis: 0}, //
             38:  {act: 'move', dir: -1, name: 'up',     axis: 1} //
-          }, 
-        _SVG = document.querySelector('svg');
+          };
+        var _SVG = document.querySelector('svg');
         _SVG.setAttribute('viewBox', '0 0 900 1400');
-        VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c),
-        DMAX = VB.slice(2), WMIN = 480, NF = 1;
-        let nav = null, tg = Array(4), f =0, rID = null;
+        var VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c);
+        var DMAX = VB.slice(2);
+        var WMIN = 480;
+        var NF = 1;
+        let nav = null;
+        let tg = Array(4);
+        let f =0;
+        let rID = null;
 
         function update(){
 
-            let k = ++f/NF, j = 1-k, cvb = VB.slice();
+            let k = ++f/NF;
+            let j = 1-k;
+            let cvb = VB.slice();
       
             if (nav.act == 'zoom'){
               for (let i = 0; i < 4; i++) {
