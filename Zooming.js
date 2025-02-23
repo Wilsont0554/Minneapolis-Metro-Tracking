@@ -14,7 +14,7 @@ window.onload = function(){
         37:  {act: 'move', dir: -1, name: 'left',   axis: 0}, //
         38:  {act: 'move', dir: -1, name: 'up',     axis: 1} //
       }, 
-    _SVG = document.querySelector('svg');
+    _SVG = document.getElementById('newMap');
     _SVG.setAttribute('viewBox', '0 0 900 1400');
     VB = _SVG.getAttribute('viewBox').split(' ').map(c=>+c),
     DMAX = VB.slice(2), WMIN = 480, NF = 1;
