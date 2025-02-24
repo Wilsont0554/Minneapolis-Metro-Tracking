@@ -26,10 +26,6 @@ if (screen.height > 700){
     
     let nav = null, tg = Array(4), f =0, rID = null;
 
-    if (screen.height < 1200){
-      document.getElementById('svgWrapperWrapper').style.height = screen.height + 'px';
-    }
-
     function update(){
 
       let k = ++f/NF, j = 1-k, cvb = VB.slice();

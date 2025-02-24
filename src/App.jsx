@@ -7,6 +7,7 @@ var currentLineID = 0; //represents the line_id who's information is being dispa
 var currentLinesStops = [];
 var displayedTripID = 0;
 var tracking = 0;
+var zoomAmount = 1;
 
 function App() {
 
@@ -240,10 +241,27 @@ function App() {
     }
   }
   
+  function zoom(direction){
+    console.log(zoomAmount);
+      if (direction == 1 && zoomAmount > 0.75){
+        zoomAmount -= 0.25
+      }
+      else if (direction == 0 && zoomAmount < 2) {
+        zoomAmount += 0.25
+      }
+      document.getElementById('newMap').style.scale = zoomAmount;
+    
+  }
+
   return (
     <>
+      
       <MetroMap setCurrentLinesStops = {setCurrentLinesStops} moveInfoBox={moveInfoBox} getDisplayedPlaceCode= {getDisplayedPlaceCode} currentLineID ={currentLineID} setPlaceCode={setPlaceCode} placeCode = {displayedPlaceCode} displayInfoBox ={displayInfoBox} stationsStops={stationLines} updateLinesAtStation={updateLinesAtStation}/>
-      <InfoBox trackTransport = {trackTransport} changeLine = {changeLine} lineColors= {lineColors} placeCode = {displayedPlaceCode} stationsStops={stationLines} displayInfoBox ={displayInfoBox}/>
+      <div className="zoomControll">      
+        <button className = 'zoom' onClick={() => zoom(1)}> - </button>
+        <button className = 'zoom' onClick={() => zoom(0)}> + </button>
+
+      </div><InfoBox trackTransport = {trackTransport} changeLine = {changeLine} lineColors= {lineColors} placeCode = {displayedPlaceCode} stationsStops={stationLines} displayInfoBox ={displayInfoBox}/>
     </>
   )
 }

@@ -17,6 +17,10 @@
 
 }
 
+.zoomControll{
+    display: none;
+}
+
 body{
     --infoBx-background: rgb(194, 194, 194);
     cursor: grab;
