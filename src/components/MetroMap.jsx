@@ -1,7 +1,7 @@
 import * as React from "react";
 
-var allRoutes = []; //represents avery route
-const numberOfRoutes = 5;
+var allRoutes = ['901', '902', '903', '904']; //represents avery route
+const numberOfRoutes = 4;
 
 export default function MetroMap (props) {
     
@@ -35,7 +35,7 @@ export default function MetroMap (props) {
     if (allRoutes.length == 0){
       const allRoutesFetch = await fetch ('https://svc.metrotransit.org/nextrip/routes');
       var tempRoutes = await allRoutesFetch.json(); //every route
-      allRoutes = tempRoutes;
+      //allRoutes = tempRoutes;
     }
         
     var linesAtCurrentStation = []; //represents the routs at the station(placeCode)
@@ -43,10 +43,7 @@ export default function MetroMap (props) {
     //Go through the first x number of routes
     for (let i = 0; i < numberOfRoutes; i++) {
       var currentRouteID = allRoutes[i];
-      if (currentRouteID.route_id == 425){ //station 425 does not show up on the official map
-        continue
-      }
-      const checkRoutesStopsFetch = await fetch('https://svc.metrotransit.org/nextrip/stops/' + currentRouteID.route_id + '/0');
+      const checkRoutesStopsFetch = await fetch('https://svc.metrotransit.org/nextrip/stops/' + currentRouteID + '/0');
       var checkRoutesStops = await checkRoutesStopsFetch.json();
       
 
@@ -54,7 +51,7 @@ export default function MetroMap (props) {
       checkRoutesStops.forEach(currentPlaceCode => {
         if (direction0PlaceCode == currentPlaceCode.place_code || direction1PlaceCode == currentPlaceCode.place_code){
           setCurrentLinesStops(checkRoutesStops);
-          linesAtCurrentStation.push(currentRouteID.route_id);
+          linesAtCurrentStation.push(currentRouteID);
         }
       });
     }
@@ -584,6 +581,9 @@ export default function MetroMap (props) {
         />
         <text transform="translate(1639.036 276.54)" className="st6 st10">
           {"Red Line"}
+        </text>
+        <text transform="translate(1639.036 331.98)" className="st6 st10">
+          {"Orange Line"}
         </text>
         <text transform="translate(1135 225.461)" className="st6 st14">
           {"METRO Light Rail Transit"}
