@@ -5,6 +5,7 @@ if (screen.height > 700){
     var oldX = 0;
     var oldY = 0;
     var zoomAmount = 1.5;
+    var inInfoBox = false;
 
     var isMouseDown = false
 
@@ -69,7 +70,7 @@ if (screen.height > 700){
         }
         else{
           //tg[0] = DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500;
-          console.log("can't go right anymore");
+          //console.log("can't go right anymore");
         }
       } 
       
@@ -84,7 +85,7 @@ if (screen.height > 700){
         }
         else{
           //tg[0] = (DMAX[nav.axis] * 2 - VB[nav.axis + 2] - 500) * -1;
-          console.log("can't go left anymore");
+          //console.log("can't go left anymore");
         }
       }
 
@@ -101,7 +102,7 @@ if (screen.height > 700){
         }
         else{
           //tg[1] = (DMAX[nav.axis] - 500);
-          console.log("can't go down anymore");
+          //console.log("can't go down anymore");
         }
       } 
       
@@ -119,7 +120,7 @@ if (screen.height > 700){
         }*/
         else{
           //tg[1] = DMAX[nav.axis] * -1 + 500;
-          console.log("can't go up anymore");
+          //console.log("can't go up anymore");
         }
 
       }
@@ -144,47 +145,56 @@ if (screen.height > 700){
 
   if (screen.width > 1000){
 
+  document.getElementById('aboutMeToggle').addEventListener("mouseover", function(){ 
+       inInfoBox = true;
+  });
+
+  document.getElementById('aboutMeToggle').addEventListener("mouseleave", function(){ 
+    inInfoBox = false;
+  });
+
   document.addEventListener('wheel', e => {
-    //zoom in
-    if(e.deltaY < 0){
-      nav = navMap[1000];
-      
-      if (nav.act == 'zoom'){
-        if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
-          //console.log(`cannot zoom ${nav.name} more`);
-          return;
-        }
-        zoomAmount += 0.1;
+    if (!inInfoBox){
+      //zoom in
+      if(e.deltaY < 0){
+        nav = navMap[1000];
+        
+        if (nav.act == 'zoom'){
+          if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
+            //console.log(`cannot zoom ${nav.name} more`);
+            return;
+          }
+          zoomAmount += 0.1;
 
-        for (let i = 0; i < 2; i++){
-          tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
-          tg[i] = 0.5 * (DMAX[i] - tg[i+2]);
-        }
-      }
-    }
-
-    // zoom out
-    else if(e.deltaY > 0){
-      nav = navMap[900];
-      zoomAmount -= 0.1;
-
-      if (nav.act == 'zoom'){
-        if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
-          //console.log(`cannot zoom ${nav.name} more`);
-          return;
-        }
-      
-        for (let i = 0; i < 2; i++){
-          tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
-          tg[i] = 0.5 * (DMAX[i] - tg[i+2]);
+          for (let i = 0; i < 2; i++){
+            tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
+            tg[i] = 0.5 * (DMAX[i] - tg[i+2]);
+          }
         }
       }
-    }
-   
-    tg[0] = VB[0];
-    tg[1] = VB[1];
-    update();
 
+      // zoom out
+      else if(e.deltaY > 0){
+        nav = navMap[900];
+        zoomAmount -= 0.1;
+
+        if (nav.act == 'zoom'){
+          if((nav.dir == -1 && VB[2] >= DMAX[0] * 2) || (nav.dir == 1 && VB[2] <= WMIN)){
+            //console.log(`cannot zoom ${nav.name} more`);
+            return;
+          }
+        
+          for (let i = 0; i < 2; i++){
+            tg[i + 2] = VB[i + 2]/Math.pow(1.1, nav.dir);
+            tg[i] = 0.5 * (DMAX[i] - tg[i+2]);
+          }
+        }
+      }
+    
+      tg[0] = VB[0];
+      tg[1] = VB[1];
+      update();
+    }
   }, false);
   }
   }

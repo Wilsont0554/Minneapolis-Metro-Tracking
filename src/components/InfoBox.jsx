@@ -4,10 +4,10 @@ import MetroMap from "./MetroMap";
 
 export default function InfoBox(props) {
 
-    const {placeCode, displayInfoBox, stationsStops, lineColors, changeLine, trackTransport} = props;
+    const {placeCode, displayInfoBox, stationsStops, lineColors, changeLine} = props;
 
     function closeInfoBox(){
-        document.getElementById('hide').style.display = '';
+        document.getElementById('hide').style.display = 'none';
     }
 
     return(

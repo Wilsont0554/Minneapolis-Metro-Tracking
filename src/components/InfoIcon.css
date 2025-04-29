@@ -1,0 +1,55 @@
+.dispalyInfoWrapper{
+    margin: 1%;
+    right: 0;
+    position: absolute;
+    display: block;
+    height: 45px;
+    width: 45px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    z-index: 100;
+}
+
+.infoIcon{
+    display: block;
+    height: 100%;
+    opacity: 0.75;
+    transition: 0.1s;
+}
+
+.infoIcon:hover{
+    opacity: 1;
+}
+
+.aboutMeToggle{
+    display: none;
+    z-index: 1;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.aboutMe{
+    padding: 2%;
+    overflow-y: scroll;
+    right: 0;
+    position: fixed;
+    width: 25vw;
+    height: 85%;
+    background-color: rgba(234, 234, 234, 1);
+    display: flex;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+
+    .aboutMe{
+        padding: 2%;
+        position: fixed;
+        bottom: 0;
+        width: 95%;
+        height: 40vh;
+        background-color: rgba(234, 234, 234, 1);
+        border-radius: 10px;
+    }
+}

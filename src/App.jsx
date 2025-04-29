@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import InfoBox from "./components/InfoBox"
 import MetroMap from "./components/MetroMap"
-import { scryRenderedDOMComponentsWithTag } from "react-dom/test-utils";
+import InfoIcon from "./components/InfoIcon"
+import ExternalLinkContainer from "./components/Links/ExternalLinkContainer.jsx"
+import ExternalLink from "./components/Links/ExternalLink.jsx"
 
 var currentLineID = 0; //represents the line_id who's information is being dispalyed
 var currentLinesStops = [];
@@ -65,8 +67,9 @@ function App() {
         direction0PlaceCode = displayedPlaceCode.substring(0,4);
         direction1PlaceCode = displayedPlaceCode.substring(4,8);
       }
-
-      displayInfoBox(currentLineID, false, direction0PlaceCode, direction1PlaceCode);
+      if (stationLines.length > 0){
+        displayInfoBox(currentLineID, false, direction0PlaceCode, direction1PlaceCode);
+      }
     }
     setCount(count + 1);
   }, 10000);
@@ -212,7 +215,7 @@ function App() {
     var infoBoxCenterLeftRight = (infoBoxRect.right - infoBoxRect.left);
     var infoBoxCenterUpDown = (infoBoxRect.bottom - infoBoxRect.top);
 
-    if (screen.width > 1000){
+    if (screen.width > 1500){
       infoBoxCoords.style.left = Math.max(((circleRect.right - (circleElement.getAttribute('r'))) - (infoBoxCenterLeftRight/2)),0) + 'px';
       infoBoxCoords.style.top = Math.max(((circleRect.top) - infoBoxCenterUpDown),0) + 'px';
     }
@@ -221,47 +224,28 @@ function App() {
     }
   }  
 
-  //Moves train to next station
-  async function trackTransport(directionCode){
-    for (let i = 0; i < currentLinesStops.length; i++){
-      
-      if (displayedPlaceCode == currentLinesStops[i].place_code){
-        
-        //gets data from one direction    
-        const nextStopFetch = await fetch('https://svc.metrotransit.org/nextrip/' + currentLineID + '/' + directionCode + '/' + currentLinesStops[i+1].place_code);
-        var nextStop = await nextStopFetch.json();        
-        
-        if (tracking == 0 && nextStop.departures[0].trip_id == displayedTripID){
-          tracking = 1;
-          //console.log(nextStop.departures[0].trip_id);
-          displayInfoBox(currentLineID, false, currentLinesStops[i+1].place_code, 0);
-          setPlaceCode(currentLinesStops[i+1].place_code);
-        }
-      }
-    }
-  }
-  
   function zoom(direction){
     console.log(zoomAmount);
       if (direction == 1 && zoomAmount > 0.75){
-        zoomAmount -= 0.25
+        zoomAmount -= 0.25;
       }
       else if (direction == 0 && zoomAmount < 2) {
-        zoomAmount += 0.25
+        zoomAmount += 0.25;
       }
       document.getElementById('newMap').style.scale = zoomAmount;
-    
+      document.getElementById('newMap').style.height = 50 * zoomAmount + "%";
+
   }
 
   return (
     <>
-      
-      <MetroMap setCurrentLinesStops = {setCurrentLinesStops} moveInfoBox={moveInfoBox} getDisplayedPlaceCode= {getDisplayedPlaceCode} currentLineID ={currentLineID} setPlaceCode={setPlaceCode} placeCode = {displayedPlaceCode} displayInfoBox ={displayInfoBox} stationsStops={stationLines} updateLinesAtStation={updateLinesAtStation}/>
+      <InfoIcon></InfoIcon>
+      <MetroMap disaplyInitialLineIcon = {disaplyInitialLineIcon} setCurrentLinesStops = {setCurrentLinesStops} moveInfoBox={moveInfoBox} getDisplayedPlaceCode= {getDisplayedPlaceCode} currentLineID ={currentLineID} setPlaceCode={setPlaceCode} placeCode = {displayedPlaceCode} displayInfoBox ={displayInfoBox} stationsStops={stationLines} updateLinesAtStation={updateLinesAtStation}/>
       <div className="zoomControll">      
         <button className = 'zoom' onClick={() => zoom(1)}> - </button>
         <button className = 'zoom' onClick={() => zoom(0)}> + </button>
-
-      </div><InfoBox trackTransport = {trackTransport} changeLine = {changeLine} lineColors= {lineColors} placeCode = {displayedPlaceCode} stationsStops={stationLines} displayInfoBox ={displayInfoBox}/>
+      </div>
+      <InfoBox changeLine = {changeLine} lineColors= {lineColors} placeCode = {displayedPlaceCode} stationsStops={stationLines} displayInfoBox ={displayInfoBox}/>
     </>
   )
 }

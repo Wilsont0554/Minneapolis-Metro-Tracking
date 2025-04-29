@@ -5,12 +5,7 @@ const numberOfRoutes = 4;
 
 export default function MetroMap (props) {
     
-  const {moveInfoBox, setPlaceCode, displayInfoBox, updateLinesAtStation, displayedPlaceCode, getDisplayedPlaceCode, setCurrentLinesStops} = props;
-
-  //st1701
-  //const apiKey = '204c7b0b6e7c4dfda32729879714dcf4';
-  //const apiURL = 'https://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=204c7b0b6e7c4dfda32729879714dcf4&mapid=40380&max=5'
-  //const apiURL = 'http://swopenapi.seoul.go.kr/api/subway/sample/xml/realtimePosition/0/5/1%ED%98%B8%EC%84%A0';
+  const {disaplyInitialLineIcon, moveInfoBox, setPlaceCode, displayInfoBox, updateLinesAtStation, displayedPlaceCode, getDisplayedPlaceCode, setCurrentLinesStops} = props;
 
   /*
   * @placeCode represents the palce code of the stop, or sometimes, two place codes in the same string
@@ -43,10 +38,10 @@ export default function MetroMap (props) {
     //Go through the first x number of routes
     for (let i = 0; i < numberOfRoutes; i++) {
       var currentRouteID = allRoutes[i];
-      const checkRoutesStopsFetch = await fetch('https://svc.metrotransit.org/nextrip/stops/' + currentRouteID + '/0');
+      var checkRoutesStopsFetch = 901;
+      checkRoutesStopsFetch = await fetch('https://svc.metrotransit.org/nextrip/stops/' + currentRouteID + '/0');
       var checkRoutesStops = await checkRoutesStopsFetch.json();
-      
-
+            
       //check to see if this route stops at the desired station(s)
       checkRoutesStops.forEach(currentPlaceCode => {
         if (direction0PlaceCode == currentPlaceCode.place_code || direction1PlaceCode == currentPlaceCode.place_code){
@@ -56,14 +51,15 @@ export default function MetroMap (props) {
       });
     }
 
+    if (linesAtCurrentStation.length == 0){
+      dispalyErrorBox(direction0PlaceCode);
+      return;
+    }
     //represents ALL lins that stop at this station
     updateLinesAtStation(linesAtCurrentStation);
     
     //sets placeCode for the one the user has selected
     setPlaceCode(placeCode);
-
-    //alter text box size based on the number of lines at this station
-    //document.getElementById('hide').style.height = (linesAtCurrentStation.length * 45); 
 
     //toggle the info box with the first station dispalyed. (changing the '0' value will change which station is disaplyed first)
     toggleInfoBox(linesAtCurrentStation[0], direction0PlaceCode, direction1PlaceCode);
