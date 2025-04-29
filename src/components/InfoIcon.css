@@ -40,16 +40,3 @@
     justify-content: space-around;
     border-radius: 10px;
 }
-
-@media (max-width: 900px) {
-
-    .aboutMe{
-        padding: 2%;
-        position: fixed;
-        bottom: 0;
-        width: 95%;
-        height: 40vh;
-        background-color: rgba(234, 234, 234, 1);
-        border-radius: 10px;
-    }
-}

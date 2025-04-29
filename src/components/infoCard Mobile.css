@@ -1,4 +1,4 @@
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     html, body{
         padding: 0;
@@ -10,7 +10,6 @@
         display: none;
         position: fixed;
         bottom: 0;
-        width: 100%;
         width: 100vw;
         max-height: 50vh;
         background-color: rgb(234, 234, 234);

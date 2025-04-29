@@ -31,3 +31,29 @@
     text-decoration-color: #7dbef9;
     text-decoration-thickness: 2px;
 }
+
+@media (max-width: 900px) {
+
+    .linkContainer{
+        margin-top: 3%;
+        position:relative;
+        margin-bottom: 10%;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        bottom: 0;
+    }
+
+    .aboutMe{
+        padding: 3%;
+        position: fixed;
+        bottom: 0;
+        width: 95%;
+        height: 40vh;
+        background-color: rgba(234, 234, 234, 1);
+        border-radius: 10px;
+        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+    }
+}
